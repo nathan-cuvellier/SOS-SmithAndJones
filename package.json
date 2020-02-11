@@ -1,0 +1,24 @@
+{
+  "name": "sos-smithandjones",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nathan-cuvellier/SOS-SmithAndJones.git"
+  },
+  "author": "worms",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nathan-cuvellier/SOS-SmithAndJones/issues"
+  },
+  "homepage": "https://github.com/nathan-cuvellier/SOS-SmithAndJones#readme",
+  "dependencies": {
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
+  }
+}
