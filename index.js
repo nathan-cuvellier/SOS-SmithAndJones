@@ -1,5 +1,5 @@
 let express = require('express');
-let app = express();
+let session = require('express-session')
 app.use(express.static('public'));
 
 app.get('/', function(req, res) {
