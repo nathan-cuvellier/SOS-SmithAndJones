@@ -10,15 +10,19 @@
     <%- include('../layout/nav.ejs') %>
 
     <div class="container">
+        <div class="text-center mt-5">
+            <h1>Nouveau ticket d'incident</h1>
+            <p>Entrez votre problème et l'assistance fera son possible pour le régler</p>
+        </div>
         <form action="" method="POST" class="mt-5 col-md-6 offset-3">
             <div class="form-group">
                 <label for="title">Titre *</label>
-                <input type="text" class="form-control" name="title" id="title">
+                <input type="text" class="form-control" name="title" id="title" required>
             </div>
             <div class="form-group">
                 <label>Poste concerné *</label>
-                <select name="id_computer" id="id_computer" class="form-control">
-                    <option value="default">...</option>
+                <select name="id_computer" id="id_computer" class="form-control" required>
+                    <option value="">...</option>
                     <option value="1">D101-S01</option>
                     <option value="2">D101-S02</option>
                     <option value="3">D101-S03</option>
@@ -29,7 +33,7 @@
 
             <div class="form-group">
                 <label for="description">Description *</label>
-                <textarea name="description" id="" rows="3" class="form-control"></textarea>
+                <textarea name="description" id="" rows="3" class="form-control" required></textarea>
             </div>
 
             <div class="form-group">
@@ -37,7 +41,23 @@
                 <input type="file" name="file" id="file" class="form-control-file">
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Valider" name="send">
+                <label for="urgency">Urgence</label>
+                <select name="priority" id="priority" class="form-control" required>
+                    <option value="">...</option>
+                    <option value="1">Très bas</option>
+                    <option value="2">Bas</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="">Catégorie *</label>
+                <select name="category" id="category" class="form-control">
+                    <option value="default">...</option>
+                    <option value="logiciel">Logiciel</option>
+                    <option value="default">Messagerie</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-dark form-control" value="Valider" name="send">
             </div>
         </form>
     </div>
