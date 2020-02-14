@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login page</title>
+    <%- include('../layout/header.ejs') %>
+</head>
+
+<body>
+    <%- include('../layout/nav.ejs') %>
+
+    <div class="container">
+        <form action="" method="POST" class="mt-5 col-md-6 offset-3">
+            <div class="form-group">
+                <label for="title">Titre *</label>
+                <input type="text" class="form-control" name="title" id="title">
+            </div>
+            <div class="form-group">
+                <label>Poste concerné *</label>
+                <select name="id_computer" id="id_computer" class="form-control">
+                    <option value="default">...</option>
+                    <option value="1">D101-S01</option>
+                    <option value="2">D101-S02</option>
+                    <option value="3">D101-S03</option>
+                    <option value="4">D101-S04</option>
+                    <option value="5">D101-S05</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description *</label>
+                <textarea name="description" id="" rows="3" class="form-control"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="file">Pièce jointe (optionnelle)</label>
+                <input type="file" name="file" id="file" class="form-control-file">
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Valider" name="send">
+            </div>
+        </form>
+    </div>
+
+
+    <%- include('../layout/footer.ejs') %>
+</body>
+
+</html>
