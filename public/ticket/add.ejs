@@ -2,18 +2,30 @@
 <html>
 
 <head>
-    <title>Login page</title>
+    <title>Login page - SOS-SmithAndJones</title>
     <%- include('../layout/header.ejs') %>
 </head>
 
 <body>
     <%- include('../layout/nav.ejs') %>
 
+    <%= Object.keys(errors).length %>
+
     <div class="container">
         <div class="text-center mt-5">
             <h1>Nouveau ticket d'incident</h1>
             <p>Entrez votre problème et l'assistance fera son possible pour le régler</p>
         </div>
+
+        <% for(var i=0; i < errors.length; i++) { %>
+        <div class="alert alert-danger col-md-6 offset-3" role="alert">
+            <h5>Erreur(s) :</h5>
+            <ul>
+                <li><%= errors[i].msg %></li>
+            </ul>
+        </div>
+        <% } %>
+        
         <form action="" method="POST" class="mt-5 col-md-6 offset-3">
             <div class="form-group">
                 <label for="title">Titre *</label>
