@@ -9,7 +9,10 @@ let addTicketRouter = require('./routes/ticket/CRUD/add');
 let RPGDRouter = require('./routes/RGPD/RGPD')
 
 require('dotenv').config()
-//let con = require('./db')
+let con = require('./db')
+
+// Environment variables
+const PORT = process.env.PORT || 8080 ;
 
 
 let app = express();
@@ -50,4 +53,4 @@ app.use('/ticket/add', addTicketRouter)
 /***********************************/
 app.use('/RGPD', RPGDRouter)
 
-app.listen(8080);
+app.listen(PORT)
