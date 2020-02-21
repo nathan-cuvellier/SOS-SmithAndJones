@@ -7,9 +7,11 @@ const { check, validationResult } = require('express-validator');
 let loginAuthRouter = require('./routes/auth/login');
 let addTicketRouter = require('./routes/ticket/CRUD/add');
 
-
 require('dotenv').config()
-//let con = require('./db')
+let con = require('./db')
+
+// Environment variables
+const PORT = process.env.PORT || 8080 ;
 
 
 let app = express();
@@ -45,4 +47,4 @@ app.get('/logout', (req, res) => {
 /***********************************/
 app.use('/ticket/add', addTicketRouter)
 
-app.listen(8080);
+app.listen(PORT)
