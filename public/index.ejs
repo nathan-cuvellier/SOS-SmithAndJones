@@ -2,65 +2,90 @@
 <html>
 
 <head>
-    <title>Home</title>
-    <%- include('layout/header.ejs') %>
+  <title>Home</title>
+  <%- include('layout/header.ejs') %>
 </head>
 
 <body>
-    <%- include('layout/nav.ejs') %>
+  <%- include('layout/nav.ejs') %>
 
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css" media="all" />
-
-
-    <h1 class="display-4 titre1">Vos tickets</h1>
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css" media="all" />
 
 
-
-       <% for (var i =1; i <=9;  i++ ) { %>
-
-        <% var randomNum =  Math.floor(Math.random() * Math.floor(2)); %>
-   
-        <% if (randomNum==0) { %>
-            <div class="CardTicket card text-white bg-dark mb-3" style="max-width: 25rem;min-width: 25rem;">
-                <div class="card-header bg-success">Poste 451</div>
-                <div class="card-body">
-                  <h5 class="card-title">Problème d'écran</h5>
-                  <p class="card-text">écran du pc noir, ne veux pas s'allumer.</p>
-                  <div class="card-footer urgence">Urgence : 4</div>
-                  <svg class="icondownload bi bi-arrow-down" width="3em" height="3em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M6.646 11.646a.5.5 0 01.708 0L10 14.293l2.646-2.647a.5.5 0 01.708.708l-3 3a.5.5 0 01-.708 0l-3-3a.5.5 0 010-.708z" clip-rule="evenodd"></path>
-                    <path fill-rule="evenodd" d="M10 4.5a.5.5 0 01.5.5v9a.5.5 0 01-1 0V5a.5.5 0 01.5-.5z" clip-rule="evenodd"></path>
-                  </svg>
-                </div>
-              </div>
-          <% } %>
-          <% if (randomNum==1) { %>
-            <div class="CardTicket card text-white bg-dark  mb-3" style="max-width: 25rem;min-width: 25rem;">
-                <div class="card-header bg-danger">Poste 51</div>
-                <div class="card-body">
-                  <h5 class="card-title">Problème logiciel paint</h5>
-                  <p class="card-text">Paint ne se lance pas a laide svp.</p>
-                  <div class="card-footer urgence">Urgence : 10</div>
-                  <svg class="icondownload bi bi-arrow-down" width="3em" height="3em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M6.646 11.646a.5.5 0 01.708 0L10 14.293l2.646-2.647a.5.5 0 01.708.708l-3 3a.5.5 0 01-.708 0l-3-3a.5.5 0 010-.708z" clip-rule="evenodd"></path>
-                    <path fill-rule="evenodd" d="M10 4.5a.5.5 0 01.5.5v9a.5.5 0 01-1 0V5a.5.5 0 01.5-.5z" clip-rule="evenodd"></path>
-                  </svg>
-                </div>
-              </div>
-          <% } %>
-
-       
-
-        <% } %>
-
-       
-        
-    
-   
+  <h1 class="display-4 titre1">Vos tickets</h1>
 
 
 
-    <%- include('layout/footer.ejs') %>
+  <% for (var i =1; i <=6;  i++ ) { %>
+
+  <% var randomNum =  Math.floor(Math.random() * Math.floor(2)); %>
+
+  <% if (randomNum==0) { %>
+  <div class="CardTicket card text-white bg-dark mb-3">
+    <div class="card-header bg-success">
+
+      <p class="posteTicket">Poste 451</p>
+
+      <a class=" detailTicket nav-link" href="/ticket/read/1">
+        <p class="detailTicket"> détails </p>
+      </a>
+
+    </div>
+
+    <div class="card-body">
+      <h5 class="card-title">Problème d'écran</h5>
+      <p class="card-text">écran du pc noir, ne veux pas s'allumer.</p>
+      <div class="card-footer urgence">Urgence : 4</div>
+      <svg class="icondownload bi bi-arrow-down" width="3em" height="3em" viewBox="0 0 20 20" fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd"
+          d="M6.646 11.646a.5.5 0 01.708 0L10 14.293l2.646-2.647a.5.5 0 01.708.708l-3 3a.5.5 0 01-.708 0l-3-3a.5.5 0 010-.708z"
+          clip-rule="evenodd"></path>
+        <path fill-rule="evenodd" d="M10 4.5a.5.5 0 01.5.5v9a.5.5 0 01-1 0V5a.5.5 0 01.5-.5z" clip-rule="evenodd">
+        </path>
+      </svg>
+    </div>
+  </div>
+  <% } %>
+
+  <% if (randomNum==1) { %>
+  <div class="CardTicket card text-white bg-dark  mb-3">
+    <div class="card-header bg-danger">
+      <p class="posteTicket">Poste 81</p>
+      <a class="detailTicket nav-link" href="/ticket/read/2">
+        <p class="detailTicket"> détails </p>
+      </a>
+    </div>
+
+
+    <div class="card-body">
+      <h5 class="card-title">Problème logiciel paint</h5>
+      <p class="card-text">Paint ne se lance pas a laide svp.</p>
+      <div class="card-footer urgence">Urgence : 10</div>
+      <svg class="icondownload bi bi-arrow-down" width="3em" height="3em" viewBox="0 0 20 20" fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd"
+          d="M6.646 11.646a.5.5 0 01.708 0L10 14.293l2.646-2.647a.5.5 0 01.708.708l-3 3a.5.5 0 01-.708 0l-3-3a.5.5 0 010-.708z"
+          clip-rule="evenodd"></path>
+        <path fill-rule="evenodd" d="M10 4.5a.5.5 0 01.5.5v9a.5.5 0 01-1 0V5a.5.5 0 01.5-.5z" clip-rule="evenodd">
+        </path>
+      </svg>
+    </div>
+  </div>
+  <% } %>
+
+
+
+  <% } %>
+
+
+
+
+
+
+
+
+  <%- include('layout/footer.ejs') %>
 </body>
 
 </html>

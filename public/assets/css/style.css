@@ -1,13 +1,16 @@
 .titre1{
     margin-left:10%;
-    margin-top: 5%;
+    margin-top: 2%;
 }
 .CardTicket{
-    width: 25%;
-    margin-left:7%;
-    margin-top: 5%; 
+ 
+    margin-left:4%;
+    margin-top: 2%; 
     display: inline-block;
+    max-width: 25rem;
+    min-width: 25rem;
 }
+
 .urgence{
     display: inline-block; 
     width: 80%;
@@ -15,3 +18,45 @@
 .icondownload{
     display: inline-block; margin-left: 5%;
 }
+.posteTicket{
+    display: inline-block;
+}
+.detailTicket{
+    float: right ;
+    text-decoration: none;
+    color: aliceblue;
+}
+
+.bodyread{
+    position: absolute;
+    background-color: #5F6469;
+    z-index: -5;
+    width: 100%;
+    height: 92.8%;
+    animation: 1s ease-out 0s 1 slideInFromTop;
+    
+}
+
+
+@keyframes slideInFromTop {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+
+  .container {
+    max-width: 960px;
+  }
+  
+  .border-top { border-top: 1px solid #e5e5e5; }
+  .border-bottom { border-bottom: 1px solid #e5e5e5; }
+  .border-top-gray { border-top-color: #adb5bd; }
+  
+  .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+  
+  .lh-condensed { line-height: 1.25; }
+  
