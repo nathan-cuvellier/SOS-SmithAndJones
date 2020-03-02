@@ -3,12 +3,10 @@ let bodyParser = require('body-parser')
 let session = require('express-session')
 const helmet = require('helmet')
 const { check, validationResult } = require('express-validator');
-
+require('dotenv').config()
 let loginAuthRouter = require('./routes/auth/login');
 let addTicketRouter = require('./routes/ticket/CRUD/add');
 let RPGDRouter = require('./routes/RGPD/RGPD')
-
-require('dotenv').config()
 let con = require('./db')
 
 // Environment variables
@@ -46,7 +44,7 @@ app.get('/logout', (req, res) => {
 /***********************************/
 /*              TICKET             */
 /***********************************/
-app.use('/ticket/add', addTicketRouter)
+app.use('/ticket/create', addTicketRouter)
 
 /***********************************/
 /*               RGPD              */
