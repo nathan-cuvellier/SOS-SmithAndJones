@@ -7,7 +7,7 @@ ROUTER.get('/', (req, res) => {
 
     con.query('SELECT * FROM POSTE_DE_TRAVAIL', (err,rows) => {
         if(err) throw err;
-        res.render(__dirname + '/../../../public/ticket/add.ejs', { workplace : rows , errors: {} })
+        res.render(__dirname + '/../../../public/ticket/CRUD/create.ejs', { workplace : rows , errors: {} })
       });
 })
 
@@ -27,7 +27,7 @@ ROUTER.post('/', [
             res.status(422)
         }
 
-        res.render(__dirname + '/../../../public/ticket/add.ejs', { errors: errors.array() })
+        res.render(__dirname + '/../../../public/ticket/CRUD/create.ejs', { errors: errors.array() })
     })
 
 
