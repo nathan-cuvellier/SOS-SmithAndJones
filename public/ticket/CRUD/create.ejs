@@ -38,11 +38,9 @@
                 <label>Poste concerné *</label>
                 <select name="id_computer" id="id_computer" class="form-control" required>
                     <option value="">...</option>
-                    <option value="1">D101-S01</option>
-                    <option value="2">D101-S02</option>
-                    <option value="3">D101-S03</option>
-                    <option value="4">D101-S04</option>
-                    <option value="5">D101-S05</option>
+                    <% for(let row of workplace) { %>
+                    <option value="<%= row.ID_poste %>"><%= row.CODE %></option>
+                    <% } %>
                 </select>
             </div>
 
@@ -65,8 +63,8 @@
             </div>
             <div class="form-group">
                 <label for="">Catégorie *</label>
-                <select name="category" id="category" class="form-control">
-                    <option value="default">...</option>
+                <select name="category" id="category" class="form-control" required>
+                    <option value="">...</option>
                     <option value="logiciel">Logiciel</option>
                     <option value="default">Messagerie</option>
                 </select>
