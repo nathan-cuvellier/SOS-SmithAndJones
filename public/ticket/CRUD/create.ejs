@@ -3,11 +3,11 @@
 
 <head>
     <title>Login page - SOS-SmithAndJones</title>
-    <%- include('../layout/header.ejs') %>
+    <%- include('../../layout/header.ejs') %>
 </head>
 
 <body>
-    <%- include('../layout/nav.ejs') %>
+    <%- include('../../layout/nav.ejs') %>
 
     
 
@@ -18,7 +18,7 @@
         </div>
 
         <% if (Object.keys(errors).length > 0) { %>
-        <div class="alert alert-danger col-md-6 offset-3" role="alert">
+        <div class="alert alert-danger" role="alert">
             <h5>Erreur(s) :</h5>
             </ul>
             <ul>
@@ -29,7 +29,7 @@
         </div>
         <% } %>
 
-        <form action="" method="POST" class="mt-5 col-md-6 offset-3">
+        <form action="" method="POST" class="mt-5 mb-5 col-md-6 offset-md-3">
             <div class="form-group">
                 <label for="title">Titre *</label>
                 <input type="text" class="form-control" name="title" id="title" required>
@@ -78,7 +78,7 @@
     </div>
 
 
-    <%- include('../layout/footer.ejs') %>
+    <%- include('../../layout/footer.ejs') %>
 </body>
 
 </html>
