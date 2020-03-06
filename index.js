@@ -1,6 +1,7 @@
 let express = require('express')
 let bodyParser = require('body-parser')
 let session = require('express-session')
+let fileUpload  = require('express-fileupload')
 const helmet = require('helmet')
 const { check, validationResult } = require('express-validator');
 require('dotenv').config()
@@ -10,7 +11,7 @@ let RPGDRouter = require('./routes/RGPD/RGPD')
 let con = require('./db')
 
 // Environment variables
-const PORT = process.env.PORT || 8080 ;
+const PORT = process.env.PORT || 8080;
 
 
 let app = express();
@@ -22,6 +23,10 @@ app.use(helmet())
 app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
+
+app.use(fileUpload({
+    limits: { fileSize: 5 * 1024 * 1024 },
+}));
 
 
 app.get('/', function (req, res) {

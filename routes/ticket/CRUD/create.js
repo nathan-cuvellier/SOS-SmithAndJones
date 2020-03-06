@@ -5,10 +5,10 @@ const { check, validationResult } = require('express-validator');
 
 ROUTER.get('/', (req, res) => {
 
-    con.query('SELECT * FROM POSTE_DE_TRAVAIL', (err,rows) => {
-        if(err) throw err;
-        res.render(__dirname + '/../../../public/ticket/CRUD/create.ejs', { workplace : rows , errors: {} })
-      });
+    con.query('SELECT * FROM POSTE_DE_TRAVAIL;SELECT * FROM PRIORITE', (err, rows) => {
+        if (err) throw err
+        res.render(__dirname + '/../../../public/ticket/CRUD/create.ejs', { workplace: rows[0], priority: rows[1], errors: {} })
+    })
 })
 
 ROUTER.post('/', [
@@ -20,16 +20,32 @@ ROUTER.post('/', [
         .trim()
         .isLength({ min: 20 }),
 
-        check('priority', 'La priorité doit être définie correctement')
-            .isInt()
+    check('priority', 'La priorité doit être définie correctement')
+        .isInt()
 ],
     (req, res) => {
+
         const errors = validationResult(req)
+
+        
 
         if (!errors.isEmpty())
             res.status(422)
+        else {
+            if (req.files.URL != null) {
+                req.files.URL.mv('attachment/' +req.files.URL.name , function (err) {
+                    if (err)
+                        return res.status(500).send(err);
+    
+                    res.send('File uploaded!');
+                });
+            }
+        }
 
-        res.render(__dirname + '/../../../public/ticket/CRUD/create.ejs', { errors: errors.array() })
+        con.query('SELECT * FROM POSTE_DE_TRAVAIL;SELECT * FROM PRIORITE', [], (err, rows) => {
+            if (err) throw err
+            res.render(__dirname + '/../../../public/ticket/CRUD/create.ejs', { workplace: rows[0], priority: rows[1], errors: errors.array() })
+        })
     })
 
 
