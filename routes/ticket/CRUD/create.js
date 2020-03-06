@@ -27,7 +27,6 @@ ROUTER.post('/', [
 
         const errors = validationResult(req)
 
-        
 
         if (!errors.isEmpty())
             res.status(422)
