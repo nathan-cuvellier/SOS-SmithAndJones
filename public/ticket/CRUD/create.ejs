@@ -29,7 +29,7 @@
         </div>
         <% } %>
 
-        <form action="" method="POST" class="mt-5 mb-5 col-md-6 offset-md-3">
+        <form action="" method="POST" class="mt-5 mb-5 col-md-6 offset-md-3" encType="multipart/form-data">
             <div class="form-group">
                 <label for="title">Titre *</label>
                 <input type="text" class="form-control" name="title" id="title" required>
@@ -51,14 +51,16 @@
 
             <div class="form-group">
                 <label for="file">Pièce jointe (optionnelle)</label>
-                <input type="file" name="file" id="file" class="form-control-file">
+                <input type="file" name="URL" id="URL" class="form-control-file">
             </div>
             <div class="form-group">
                 <label for="urgency">Urgence</label>
                 <select name="priority" id="priority" class="form-control" required>
                     <option value="">...</option>
-                    <option value="1">Très bas</option>
-                    <option value="2">Bas</option>
+
+                    <% for (let row of priority) {%>
+                        <option value="<%= row.id_priorite %>"><%= row.num_priorite %> <%= row.label_priorite %></option>
+                    <% } %>
                 </select>
             </div>
             <div class="form-group">
