@@ -21,7 +21,12 @@ ROUTER.post('/', [
         .isLength({ min: 20 }),
 
     check('priority', 'La priorité doit être définie correctement')
-        .isInt()
+        .isInt(),
+
+    check('URL', 'Le fichier doit être en png ou jpeg').custom((value, { req }) => 
+        req.files === null ||
+        req.files.URL === null ||
+        ["image/jpeg","image/png"].includes(req.files.URL.mimetype))
 ],
     (req, res) => {
 
@@ -31,12 +36,13 @@ ROUTER.post('/', [
         if (!errors.isEmpty())
             res.status(422)
         else {
-            if (req.files.URL != null) {
-                req.files.URL.mv('attachment/' +req.files.URL.name , function (err) {
+            if (req.files !== null && req.files.URL !== null) {
+                let split = req.files.URL.name.split('.')
+                let ext = split[split.length - 1]
+                
+                req.files.URL.mv('attachment/' + (new Date()).valueOf() + "." +  ext , function (err) {
                     if (err)
                         return res.status(500).send(err);
-    
-                    res.send('File uploaded!');
                 });
             }
         }
