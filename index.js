@@ -24,10 +24,10 @@ app.use(helmet())
 
 app.set('trust proxy', 1);
 app.use(SESSION({
-	secret: SESSION_SECRET,
+	secret: process.env.SESSION_SECRET,
 	resave: true,
 	saveUninitialized: true,
-	cookie: { secure: PRODUCTION_MODE, maxAge: DISCORD_EXPIRATION_TOKEN_MS}
+	cookie: { secure: process.env.PRODUCTION_MODE, maxAge: Number(process.env.DISCORD_EXPIRATION_TOKEN_MS)}
 }));
 
 // parse application/x-www-form-urlencoded
