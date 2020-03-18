@@ -61,7 +61,7 @@ app.get('/logout', (req, res) => {
 /***********************************/
 app.use('/ticket/create', addTicketRouter)
 
-app.use('/ticket/read/:id',readTicketRouter)
+app.use('/ticket/read/',readTicketRouter)
 
 /***********************************/
 /*               RGPD              */

@@ -2,13 +2,20 @@ const EXPRESS = require('express');
 const ROUTER = EXPRESS.Router();
 let con = require('./../../../db')
 
-ROUTER.get('/', (req, res) => {
+ROUTER.get('/:id', (req, res) => {
 
-    con.query('SELECT * FROM TICKET;SELECT * FROM POSTE_DE_TRAVAIL', (err,rows) => {
+    let query = "SELECT * FROM TICKET t" +
+        " JOIN POSTE_DE_TRAVAIL pdt ON pdt.ID_poste = t.ID_poste" +
+        " JOIN PRIORITE p ON p.id_priorite = t.ID_PRIORITE" +
+        " JOIN CATEGORIE c on c.id_categorie = t.ID_CATEGORIE" +
+        " WHERE t.ID_ticket = ?" +
+        " LIMIT 1"
+
+
+   con.query(query, req.params.id, (err,rows) => {
         if(err) throw err;
-
         console.log(req.params)
-        res.render(__dirname + '/../../../public/ticket/CRUD/read.ejs', {idticket: req.params.id, tickets : rows[0], postes : rows[1]  , errors: {} })
+        res.render(__dirname + '/../../../public/ticket/CRUD/read.ejs', {ticket : rows[0]})
     });
   
 })
