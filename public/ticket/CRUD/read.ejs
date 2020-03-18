@@ -11,7 +11,7 @@
 <%- include('../../layout/nav.ejs') %>
 
 <body>
-<div class="container mt-md-5 mt-2">
+<div class="container mt-md-5 mt-2 mb-5">
     <div class="row">
         <div class="col-lg-8">
             <h3 class="text-center"><%= ticket.TITRE %></h3>
@@ -29,7 +29,8 @@
                         <i>Aucune pièce jointe...</i>
                     <% } else { %>
                         <a href="/attachment/<%= ticket.ATTACHMENT_URL %>" target="_blank">
-                            Afficher <svg style="margin-left: 0;" class="icondownload bi bi-arrow-down" width="2em" height="2em"
+                            Afficher <svg style="margin-left: 0;" class="icondownload bi bi-arrow-down" width="2em"
+                                          height="2em"
                                           viewBox="0 0 20 20"
                                           fill="currentColor"
                                           xmlns="http://www.w3.org/2000/svg">
@@ -66,9 +67,9 @@
             </div>
         </div>
     </div>
-
-
 </div>
+
+<%- include('../../layout/footer.ejs') %>
 </body>
 
 </html>
