@@ -9,7 +9,6 @@
 <body>
     <%- include('../../layout/nav.ejs') %>
 
-    
 
     <div class="container">
         <div class="text-center mt-5">
@@ -20,13 +19,18 @@
         <% if (Object.keys(errors).length > 0) { %>
         <div class="alert alert-danger" role="alert">
             <h5>Erreur(s) :</h5>
-            </ul>
             <ul>
                 <% for(var i=0; i < errors.length; i++) { %>
                 <li><%= errors[i].msg %></li>
                 <% } %>
             </ul>
         </div>
+        <% } %>
+
+        <% if(typeof success !== 'undefined' && success !== null) { %>
+            <div class="alert alert-success" role="alert">
+                <h5>Success : votre ticket va être prise en charge par un membre de l'équipe le plus rapidement possible</h5>
+            </div>
         <% } %>
 
         <form action="" method="POST" class="mt-5 mb-5 col-md-6 offset-md-3" encType="multipart/form-data">
@@ -50,26 +54,31 @@
             </div>
 
             <div class="form-group">
-                <label for="file">Pièce jointe (optionnelle)</label>
+                <label for="file">Pièce jointe (format : PNG/JPG, max 5Mo)</label>
                 <input type="file" name="URL" id="URL" class="form-control-file">
             </div>
             <div class="form-group">
-                <label for="urgency">Urgence</label>
+                <label for="urgency">Urgence *</label>
                 <select name="priority" id="priority" class="form-control" required>
                     <option value="">...</option>
 
-                    <% for (let row of priority) {%>
+                    <% for (let row of priorities) {%>
                         <option value="<%= row.id_priorite %>"><%= row.num_priorite %> <%= row.label_priorite %></option>
                     <% } %>
                 </select>
             </div>
             <div class="form-group">
-                <label for="">Catégorie *</label>
-                <select name="category" id="category" class="form-control" required>
+                <label for="id_category">Catégorie *</label>
+                <select name="id_category" id="category" class="form-control" required>
                     <option value="">...</option>
-                    <option value="logiciel">Logiciel</option>
-                    <option value="default">Messagerie</option>
+                    <% for(let category of categories) {%>
+                        <option value="<%= category.id_categorie%>"><%= category.label_categorie %></option>
+                    <% } %>
                 </select>
+            </div>
+            <div class="form-group">
+                <label for="specify">Préciser (optionnelle)</label>
+                <input name="specify" id="specify" class="form-control" placeholder="OS, ERP, mail, oubli mot de passe..."/>
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-dark form-control" value="Valider" name="send">
