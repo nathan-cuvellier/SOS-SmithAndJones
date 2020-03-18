@@ -35,9 +35,9 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
-app.use(fileUpload());
-
-
+app.use(fileUpload({
+	limits: { fileSize: 5 * 1024 * 1024 },
+}));
 
 app.use('/', homeRouter)
 
