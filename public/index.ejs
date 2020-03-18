@@ -9,45 +9,129 @@
 <body>
 <%- include('layout/nav.ejs') %>
 
-<h1 class="display-4 titre1">Vos tickets</h1>
+<div class="row w-100">
+    <div class="col-md-2 bg-gray">
+        <div class="container mt-2">
+            <h5 class="text-center">Filtre :</h5>
+            <form action="">
+                <div class="form-group">
+                    <label for="name_user">Nom de l'utilisateur</label>
+                    <input type="text" class="form-control" name="name_user" id="name_user"
+                           value="<%= req.query.name_user %>">
+                </div>
 
-<div class="d-flex justify-content-around flex-wrap">
-    <% for (var ticket of tickets){ %>
-    <div class="CardTicket card text-white bg-dark mb-3">
-        <% if (ticket.STATUS == "en cours"){ %>
-        <div class="card-header bg-danger">
-            <% } %>
-            <% if (ticket.STATUS == "terminé"){ %>
-            <div class="card-header bg-success">
-                <% } %>
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <select class="form-control" name="status" id="status">
+                        <option value="">...</option>
+                        <option value="en cours"
+                        <% if(req.query.status === "en cours") { %> selected
+                                <% } %>
+                        >En cours
+                        </option>
+                        <option value="terminé"
+                        <% if(req.query.status === "terminé") { %> selected
+                                <% } %>
+                        >terminé
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="priority">Urgence</label>
+                    <select class="form-control" name="priority" id="priority">
+                        <option value="">...</option>
+                        <% for(let priority of priorities) { %>
+                            <option value="<%= priority.id_priorite %>"
+                            <% if(parseInt(req.query.priority) === priority.id_priorite) { %> selected
+                                    <% } %>
+                            ><%= priority.label_priorite %></option>
+                        <% } %>
+                    </select>
+                </div>
 
-                <p class="posteTicket"><%= ticket.CODE %></p>
-                <a class=" detailTicket nav-link" href="/ticket/read/<%= ticket.ID_ticket %>">détails</a>
-            </div>
+                <div class="form-group">
+                    <label for="date">Date</label>
+                    <select class="form-control" name="date" id="date">
+                        <option value="">...</option>
+                        <option value="1j"
+                        <% if(req.query.date === "1j") { %> selected
+                                <% } %>
+                        >Moins d'1 jour
+                        </option>
+                        <option value="2j"
+                        <% if(req.query.date === "2j") { %> selected
+                                <% } %>
+                        >Moins de 2 jours
+                        </option>
+                        <option value="3j"
+                        <% if(req.query.date === "3j") { %> selected
+                                <% } %>
+                        >Moins de 3 jours
+                        </option>
+                        <option value="1s"
+                        <% if(req.query.date === "1s") { %> selected
+                                <% } %>
+                        >Moins d'1 semaine
+                        </option>
+                    </select>
+                </div>
 
-            <div class="card-body">
-                <h5 class="card-title"><%= ticket.TITRE.toUpperCase() %></h5>
-                <p class="card-text"><%= ticket.DESCRIPTION.length > 75 ? ticket.DESCRIPTION.substr(0, 75) + '...' : ticket.DESCRIPTION %></p>
-                <div class="card-footer urgence">urgence : <%= ticket.label_priorite %></div>
-                <% if(ticket.ATTACHMENT_URL) { %>
-                    <a href="attachment/<%= ticket.ATTACHMENT_URL %>" target="_blank" style="color: inherit;">
-                    <svg class="icondownload bi bi-arrow-down" width="3em" height="3em" viewBox="0 0 20 20"
-                         fill="currentColor"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                              d="M6.646 11.646a.5.5 0 01.708 0L10 14.293l2.646-2.647a.5.5 0 01.708.708l-3 3a.5.5 0 01-.708 0l-3-3a.5.5 0 010-.708z"
-                              clip-rule="evenodd"></path>
-                        <path fill-rule="evenodd" d="M10 4.5a.5.5 0 01.5.5v9a.5.5 0 01-1 0V5a.5.5 0 01.5-.5z"
-                              clip-rule="evenodd">
-                        </path>
-                    </svg>
-                    </a>
-                <% } %>
-            </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-dark form-control" value="filtrer">
+                    <input type="submit" class="mt-2 btn btn-dark form-control"  name="reset" value="reset">
+                </div>
+            </form>
         </div>
-        <% } %>
-    </div>
 
+    </div>
+    <div class="col-md-10">
+
+        <h1 class="display-4 titre1">Vos tickets</h1>
+
+        <% if(count !== false) { %>
+            <div class="d-flex justify-content-center">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong><%= count %></strong> ticket(s) trouvé(s)
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        <% } %>
+
+        <div class="d-flex justify-content-around flex-wrap">
+            <% for (let ticket of tickets){ %>
+                <div class="CardTicket card text-white bg-dark mb-3">
+                    <div class="card-header bg-<% if (ticket.STATUS == "en cours") { %>danger<% } else { %>success<% } %>">
+
+                        <p class="posteTicket"><%= ticket.CODE %></p>
+                        <a class=" detailTicket nav-link" href="/ticket/read/<%= ticket.ID_ticket %>">détails</a>
+                    </div>
+
+                    <div class="card-body">
+                        <h5 class="card-title"><%= ticket.TITRE.toUpperCase() %></h5>
+                        <p class="card-text"><%= ticket.DESCRIPTION.length > 75 ? ticket.DESCRIPTION.substr(0, 75) + '...' : ticket.DESCRIPTION %></p>
+                        <div class="card-footer urgence">urgence : <%= ticket.label_priorite %></div>
+                        <% if(ticket.ATTACHMENT_URL) { %>
+                            <a href="attachment/<%= ticket.ATTACHMENT_URL %>" target="_blank" style="color: inherit;">
+                                <svg class="icondownload bi bi-arrow-down" width="3em" height="3em" viewBox="0 0 20 20"
+                                     fill="currentColor"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M6.646 11.646a.5.5 0 01.708 0L10 14.293l2.646-2.647a.5.5 0 01.708.708l-3 3a.5.5 0 01-.708 0l-3-3a.5.5 0 010-.708z"
+                                          clip-rule="evenodd"></path>
+                                    <path fill-rule="evenodd"
+                                          d="M10 4.5a.5.5 0 01.5.5v9a.5.5 0 01-1 0V5a.5.5 0 01.5-.5z"
+                                          clip-rule="evenodd">
+                                    </path>
+                                </svg>
+                            </a>
+                        <% } %>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+    </div>
 </div>
 <%- include('layout/footer.ejs') %>
 </body>
