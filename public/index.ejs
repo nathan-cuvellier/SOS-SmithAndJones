@@ -15,10 +15,10 @@
     <% for (var ticket of tickets){ %>
     <div class="CardTicket card text-white bg-dark mb-3">
         <% if (ticket.STATUS == "en cours"){ %>
-        <div class="card-header bg-success">
+        <div class="card-header bg-danger">
             <% } %>
             <% if (ticket.STATUS == "terminé"){ %>
-            <div class="card-header bg-danger">
+            <div class="card-header bg-success">
                 <% } %>
 
                 <p class="posteTicket"><%= ticket.CODE %></p>
@@ -30,7 +30,7 @@
                 <p class="card-text"><%= ticket.DESCRIPTION.length > 75 ? ticket.DESCRIPTION.substr(0, 75) + '...' : ticket.DESCRIPTION %></p>
                 <div class="card-footer urgence">urgence : <%= ticket.label_priorite %></div>
                 <% if(ticket.ATTACHMENT_URL) { %>
-                    <a href="attachment/<%= ticket.ATTACHMENT_URL %>" style="color: inherit;">
+                    <a href="attachment/<%= ticket.ATTACHMENT_URL %>" target="_blank" style="color: inherit;">
                     <svg class="icondownload bi bi-arrow-down" width="3em" height="3em" viewBox="0 0 20 20"
                          fill="currentColor"
                          xmlns="http://www.w3.org/2000/svg">
