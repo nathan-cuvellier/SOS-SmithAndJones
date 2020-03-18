@@ -1,68 +1,74 @@
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" type="text/css" href="../../assets/css/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../../assets/css/style.css" media="all"/>
 
 <head>
     <title>Home</title>
-    
+
     <%- include('../../layout/header.ejs') %>
 </head>
 
 <%- include('../../layout/nav.ejs') %>
 
 <body>
+<div class="container mt-md-5 mt-2">
+    <div class="row">
+        <div class="col-lg-8">
+            <h3 class="text-center"><%= ticket.TITRE %></h3>
 
-    <div class="bodyread">
+            <p class="mt-md-4 mt-2"><b>Catégorie : <%= ticket.label_categorie %></b></p>
 
-       
-         
-  <% for (var ticket of tickets){ %>
-    <% if(idticket == ticket.ID){%>
+            <div class="mt-md-4 mt-2">
+                <span><b>Description : </b></span>
+                <span><%= ticket.DESCRIPTION %></span>
+            </div>
+            <div class="mt-md-4 mt-2">
+                <span><b>Pièce jointe : </b></span>
+                <span>
+                    <% if(ticket.ATTACHMENT_URL === null) { %>
+                        <i>Aucune pièce jointe...</i>
+                    <% } else { %>
+                        <a href="/attachment/<%= ticket.ATTACHMENT_URL %>" target="_blank">
+                            Afficher <svg style="margin-left: 0;" class="icondownload bi bi-arrow-down" width="2em" height="2em"
+                                          viewBox="0 0 20 20"
+                                          fill="currentColor"
+                                          xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                              d="M6.646 11.646a.5.5 0 01.708 0L10 14.293l2.646-2.647a.5.5 0 01.708.708l-3 3a.5.5 0 01-.708 0l-3-3a.5.5 0 010-.708z"
+                              clip-rule="evenodd"></path>
+                        <path fill-rule="evenodd" d="M10 4.5a.5.5 0 01.5.5v9a.5.5 0 01-1 0V5a.5.5 0 01.5-.5z"
+                              clip-rule="evenodd">
+                        </path>
+                    </svg>
+                        </a>
+                    <% } %>
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card text-center">
+                <div class="card-header">
+                    Informations
+                </div>
+                <div class="card-body">
+                    <h6 class="card-title d-inline">Ticket ouvert depuis le</h6>
+                    <p class="card-text d-inline"><small><%= new Date(ticket.CREATED_AT).getDate() %>
+                            /<%= new Date(ticket.CREATED_AT).getMonth() + 1 %>
+                            /<%= new Date(ticket.CREATED_AT).getFullYear() %></small></p>
+                    <br>
+                    <h6 class="d-inline">Etat : </h6>
+                    <p class="d-inline card-text"><%= ticket.STATUS %></p>
+                    <br>
+                    <h6 class="d-inline">Urgence : </h6>
+                    <p class="d-inline card-text"><%= ticket.label_priorite %></p>
 
-    <div class="CardTicket card text-white bg-dark mb-3">
-        <% if (ticket.STATUS == "en cours"){ %>
-          <div class="card-header bg-success">
-              <% } %>
-      <% if (ticket.STATUS == "terminé"){ %>
-        <div class="card-header bg-danger">
-          <% } %>
-    
-        <% for (var poste of postes){ %>
-          <% if (poste.ID_poste == ticket.ID_poste) { %>
-          <p class="posteTicket"><%=poste.CODE%></p>
-          <% } %>
-        <% } %>
-        <a class=" detailTicket nav-link" href="/ticket/read/<%= ticket.ID_ticket%>">détails</a>
-    
-  
-      </div>
-  
-      <div class="card-body">
-        <h5 class="card-title"><%=ticket.TITRE.toUpperCase()%></h5>
-        <p class="card-text"><%= ticket.DESCRIPTION %></p>
-        <div class="card-footer urgence">urgence : <%=ticket.PRIORITE%></div>
-        <svg class="icondownload bi bi-arrow-down" width="3em" height="3em" viewBox="0 0 20 20" fill="currentColor"
-          xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd"
-            d="M6.646 11.646a.5.5 0 01.708 0L10 14.293l2.646-2.647a.5.5 0 01.708.708l-3 3a.5.5 0 01-.708 0l-3-3a.5.5 0 010-.708z"
-            clip-rule="evenodd"></path>
-          <path fill-rule="evenodd" d="M10 4.5a.5.5 0 01.5.5v9a.5.5 0 01-1 0V5a.5.5 0 01.5-.5z" clip-rule="evenodd">
-          </path>
-        </svg>
-      </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <% } %>   
-<% } %>
 
 
-
-
-
-    </div>
-
-
-
-
+</div>
 </body>
 
 </html>
