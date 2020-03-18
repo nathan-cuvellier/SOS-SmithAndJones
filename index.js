@@ -5,7 +5,7 @@ let fileUpload  = require('express-fileupload')
 const helmet = require('helmet')
 const { check, validationResult } = require('express-validator');
 require('dotenv').config()
-let homeRouter = require('./routes/home')
+let homeRouter = require('./routes/index')
 let loginAuthRouter = require('./routes/auth/login');
 let addTicketRouter = require('./routes/ticket/CRUD/create');
 let readTicketRouter = require('./routes/ticket/CRUD/read')
@@ -19,6 +19,8 @@ const PORT = process.env.PORT || 8080;
 
 let app = express();
 app.use(express.static('public'));
+app.use('/attachment', express.static('attachment'));
+
 
 app.use(helmet())
 
