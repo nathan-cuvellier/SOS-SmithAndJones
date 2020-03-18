@@ -21,34 +21,35 @@
             <div class="card-header bg-danger">
                 <% } %>
 
-                <% for (var poste of postes){ %>
-                    <% if (poste.ID_poste == ticket.ID_poste) { %>
-                        <p class="posteTicket"><%= poste.CODE %></p>
-                    <% } %>
-                <% } %>
+                <p class="posteTicket"><%= ticket.CODE %></p>
                 <a class=" detailTicket nav-link" href="/ticket/read/<%= ticket.ID_ticket %>">détails</a>
             </div>
 
             <div class="card-body">
                 <h5 class="card-title"><%= ticket.TITRE.toUpperCase() %></h5>
-                <p class="card-text"><%= ticket.DESCRIPTION %></p>
-                <div class="card-footer urgence">urgence : <%= ticket.PRIORITE %></div>
-                <svg class="icondownload bi bi-arrow-down" width="3em" height="3em" viewBox="0 0 20 20" fill="currentColor"
-                     xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                          d="M6.646 11.646a.5.5 0 01.708 0L10 14.293l2.646-2.647a.5.5 0 01.708.708l-3 3a.5.5 0 01-.708 0l-3-3a.5.5 0 010-.708z"
-                          clip-rule="evenodd"></path>
-                    <path fill-rule="evenodd" d="M10 4.5a.5.5 0 01.5.5v9a.5.5 0 01-1 0V5a.5.5 0 01.5-.5z"
-                          clip-rule="evenodd">
-                    </path>
-                </svg>
+                <p class="card-text"><%= ticket.DESCRIPTION.length > 75 ? ticket.DESCRIPTION.substr(0, 75) + '...' : ticket.DESCRIPTION %></p>
+                <div class="card-footer urgence">urgence : <%= ticket.label_priorite %></div>
+                <% if(ticket.ATTACHMENT_URL) { %>
+                    <a href="attachment/<%= ticket.ATTACHMENT_URL %>" style="color: inherit;">
+                    <svg class="icondownload bi bi-arrow-down" width="3em" height="3em" viewBox="0 0 20 20"
+                         fill="currentColor"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                              d="M6.646 11.646a.5.5 0 01.708 0L10 14.293l2.646-2.647a.5.5 0 01.708.708l-3 3a.5.5 0 01-.708 0l-3-3a.5.5 0 010-.708z"
+                              clip-rule="evenodd"></path>
+                        <path fill-rule="evenodd" d="M10 4.5a.5.5 0 01.5.5v9a.5.5 0 01-1 0V5a.5.5 0 01.5-.5z"
+                              clip-rule="evenodd">
+                        </path>
+                    </svg>
+                    </a>
+                <% } %>
             </div>
         </div>
         <% } %>
+    </div>
+
 </div>
-
-
-    <%- include('layout/footer.ejs') %>
+<%- include('layout/footer.ejs') %>
 </body>
 
 </html>
