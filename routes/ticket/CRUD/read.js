@@ -11,13 +11,33 @@ ROUTER.get('/:id', (req, res) => {
         " WHERE t.ID_ticket = ?" +
         " LIMIT 1"
 
+    let comment = "SELECT * from COMMENTAIRE c" +
+        " JOIN UTILISATEUR u ON u.ID_UTILISATEUR = c.id_utilisateur" +
+        " WHERE c.ID_ticket = ?"
 
-   con.query(query, req.params.id, (err,rows) => {
+    let id_ticket = parseInt(req.params.id)
+   con.query(query+";"+comment, [id_ticket, id_ticket], (err,rows) => {
         if(err) throw err;
-        console.log(req.params)
-        res.render(__dirname + '/../../../public/ticket/CRUD/read.ejs', {ticket : rows[0]})
+        console.log(rows[1])
+        res.render(__dirname + '/../../../public/ticket/CRUD/read.ejs', {ticket : rows[0][0], comments: rows[1]})
     });
   
+})
+
+ROUTER.post('/:id', (req, res) => {
+    if(req.body.send_comment !== undefined) {
+        con.query("INSERT INTO COMMENTAIRE SET created_at = NOW(), ?",
+            {
+                'ID_ticket': req.params.id,
+                'id_utilisateur': 3,
+                'TEXT': req.body.comment
+            }, (err,rows) => {
+            if(err) throw err;
+            res.render(__dirname + '/../../../public/ticket/CRUD/read.ejs', {ticket : rows[0]})
+        });
+    }
+
+    return res.redirect('/ticket/read/' + req.params.id)
 })
 
 
