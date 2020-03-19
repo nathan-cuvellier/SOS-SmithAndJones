@@ -3,8 +3,7 @@
 <link rel="stylesheet" type="text/css" href="../../assets/css/style.css" media="all"/>
 
 <head>
-    <title>Home</title>
-
+    <title>Ticket n°<%= ticket.ID_ticket %></title>
     <%- include('../../layout/header.ejs') %>
 </head>
 
@@ -62,7 +61,15 @@
                     <br>
                     <h6 class="d-inline">Urgence : </h6>
                     <p class="d-inline card-text"><%= ticket.label_priorite %></p>
-
+                </div>
+                <div class="card-footer">
+                    <% if(ticket.STATUS === "terminé") { %>
+                        <button class="form-control btn btn-danger">Déjà clos</button>
+                    <% } else { %>
+                        <form action="/ticket/close/<%= ticket.ID_ticket %>" method="post">
+                            <input type="submit" class="btn btn-outline-danger form-control" value="Clore">
+                        </form>
+                    <% } %>
                 </div>
             </div>
         </div>
