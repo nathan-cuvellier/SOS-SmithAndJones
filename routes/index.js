@@ -5,6 +5,34 @@ let con = require('./../db')
 
 ROUTER.get('/', (req, res) =>
 {
+    let id_role = 1 // wait session
+
+    if(id_role === 1)
+        operatorManager(req, res)
+    else if(id_role === 2)
+        applicant(req, res)
+
+})
+
+function applicant(req, res){
+
+    let tickets = "SELECT * FROM TICKET t" +
+        " JOIN UTILISATEUR u ON u.ID_UTILISATEUR = t.ID_UTILISATEUR" +
+        " JOIN ROLE r ON r.id_role = u.ID_ROLE" +
+        " JOIN POSTE_DE_TRAVAIL pdt ON pdt.ID_poste = t.ID_poste" +
+        " JOIN PRIORITE p ON p.id_priorite = t.ID_PRIORITE" +
+        " JOIN CATEGORIE c on c.id_categorie = t.ID_CATEGORIE" +
+        " WHERE u.ID_UTILISATEUR = ?"
+
+    con.query(tickets, [2],(err, rows) =>
+    {
+        if (err) throw err;
+
+        res.render(__dirname + '/../public/home/applicant.ejs', {tickets: rows})
+    });
+}
+
+function operatorManager(req, res){
     if(req.query.reset)
         return res.redirect('/')
 
@@ -24,7 +52,7 @@ ROUTER.get('/', (req, res) =>
      * @type {*[]}
      */
     let params = []
-    
+
 
     if (req.query.status) {
         tickets += " WHERE t.STATUS = ?"
@@ -92,9 +120,8 @@ ROUTER.get('/', (req, res) =>
         if(Object.keys(req.query).length > 0)
             count = rows[0].length
 
-        res.render(__dirname + '/../public/index.ejs', {tickets: rows[0], priorities: rows[1], req: req, count: count})
+        res.render(__dirname + '/../public/home/operatorManager.ejs', {tickets: rows[0], priorities: rows[1], req: req, count: count})
     });
-
-})
+}
 
 module.exports = ROUTER;
