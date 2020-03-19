@@ -89,7 +89,6 @@ ROUTER.post('/', [
                                 'DESCRIPTION': req.body.description.trim(),
                                 'STATUS': 'en cours',
                                 'CREATED_AT': new Date(),
-                                'ID_PRIORITE': id_priorite,
                                 'TITRE': req.body.title.trim(),
                                 'ID_CATEGORIE': id_categorie,
                                 'PRECISER': req.body.specify.length === 0 ? null : req.body.specify
