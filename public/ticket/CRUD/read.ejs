@@ -12,8 +12,8 @@
 <body>
 <div class="container mt-md-5 mt-2 mb-5">
     <div class="row">
-        <div class="col-lg-8">
-            <h3 class="text-center"><%= ticket.TITRE %></h3>
+        <div class="col-lg-9">
+            <h3 class="text-center"><%= ticket.TITRE.toUpperCase() %></h3>
 
             <p class="mt-md-4 mt-2"><b>Catégorie : <%= ticket.label_categorie %></b></p>
 
@@ -44,17 +44,36 @@
                     <% } %>
                 </span>
             </div>
+            <hr class="my-5">
+            <form action="/ticket/read/<%= ticket.ID_ticket %>" method="post">
+                <div class="form-group">
+                    <label for="comment">Ajouter un commentaire :</label>
+                    <textarea class="form-control" name="comment" id="comment" rows="3"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" class="btn btn-dark" value="Valider" name="send_comment">
+                </div>
+            </form>
+
+            <div class="mt-5">
+                <h3 class="mb-5">Commentaires :</h3>
+                <div class="ml-3">
+                    <% for(let comment of comments) { %>
+                        <span>De <b><%= comment.SURNAME %> <%= comment.NAME %> </b> le <%= new Date(comment.created_at).getDate() %>/<%= new Date(comment.created_at).getMonth() + 1 %>/<%= new Date(comment.created_at).getFullYear() %> à <%= new Date(comment.created_at).getHours()%>h<%= new Date(comment.created_at).getMinutes()%> :</span>
+                        <p class="ml-2"><%= comment.TEXT %></p>
+                    <% } %>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-3">
             <div class="card text-center">
                 <div class="card-header">
                     Informations
                 </div>
                 <div class="card-body">
-                    <h6 class="card-title d-inline">Ticket ouvert depuis le</h6>
-                    <p class="card-text d-inline"><small><%= new Date(ticket.CREATED_AT).getDate() %>
-                            /<%= new Date(ticket.CREATED_AT).getMonth() + 1 %>
-                            /<%= new Date(ticket.CREATED_AT).getFullYear() %></small></p>
+                    <h6 class="card-title d-inline">Ticket ouvert le</h6>
+                    <p class="card-text d-inline"><small><%= new Date(ticket.CREATED_AT).getDate() %>/<%= new Date(ticket.CREATED_AT).getMonth() + 1 %>/<%= new Date(ticket.CREATED_AT).getFullYear() %></small></p>
                     <br>
                     <h6 class="d-inline">Etat : </h6>
                     <p class="d-inline card-text"><%= ticket.STATUS %></p>
