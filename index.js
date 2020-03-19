@@ -7,6 +7,7 @@ const { check, validationResult } = require('express-validator');
 require('dotenv').config()
 let homeRouter = require('./routes/index')
 let loginAuthRouter = require('./routes/auth/login');
+let logoutAuthRouter = require('./routes/auth/logout');
 let addTicketRouter = require('./routes/ticket/CRUD/create');
 let readTicketRouter = require('./routes/ticket/CRUD/read')
 let RPGDRouter = require('./routes/RGPD/RGPD')
@@ -52,9 +53,7 @@ app.use('/login', loginAuthRouter)
 /***********************************/
 /*              LOGOUT             */
 /***********************************/
-app.get('/logout', (req, res) => {
-    res.redirect('/')
-})
+app.use('/logout', logoutAuthRouter)
 
 /***********************************/
 /*              TICKET             */
