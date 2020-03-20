@@ -46,8 +46,7 @@ function operatorManager(req, res){
         " JOIN UTILISATEUR u ON u.ID_UTILISATEUR = t.ID_UTILISATEUR" +
         " JOIN POSTE_DE_TRAVAIL pdt ON pdt.ID_poste = t.ID_poste" +
         " JOIN PRIORITE p ON p.id_priorite = t.ID_PRIORITE" +
-        " JOIN CATEGORIE c on c.id_categorie = t.ID_CATEGORIE" +
-        " ORDER BY t.CREATED_AT DESC"
+        " JOIN CATEGORIE c on c.id_categorie = t.ID_CATEGORIE"
 
     /**
      * this variable is use in order to add a "WHERE" or "AND" in the query
@@ -115,6 +114,7 @@ function operatorManager(req, res){
         params.push('%' + req.query.name_user.toLowerCase() + '%')
     }
 
+    tickets += " ORDER BY t.CREATED_AT DESC"
     let priorities = "SELECT * FROM PRIORITE"
 
     con.query(tickets + ";" + priorities, params,(err, rows) =>
