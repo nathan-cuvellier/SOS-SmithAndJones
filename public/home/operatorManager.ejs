@@ -104,7 +104,7 @@
                 <div class="CardTicket card text-white bg-dark mb-3">
                     <div class="card-header bg-<% if (ticket.STATUS == "en cours") { %>danger<% } else { %>success<% } %>">
 
-                        <p class="posteTicket"><%= ticket.CODE %></p>
+                        <p class="posteTicket"><% if (ticket.STATUS == "en cours") { %>[En cours]<% } else { %>[Clos]<% } %>&nbsp;<%= ticket.CODE %></p>
                         <a class=" detailTicket nav-link" href="/ticket/read/<%= ticket.ID_ticket %>">détails</a>
                     </div>
 
