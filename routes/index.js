@@ -71,6 +71,8 @@ function operatorManager(req, res){
             tickets += " AND"
         else
             tickets += " WHERE"
+
+        where = true
         tickets += " p.id_priorite = ?"
         params.push(parseInt(req.query.priority))
     }
@@ -81,6 +83,7 @@ function operatorManager(req, res){
         else
             tickets += " WHERE"
 
+        where = true
         let number = 1, unit = "j"
         switch (req.query.date) {
             case  '1j':
