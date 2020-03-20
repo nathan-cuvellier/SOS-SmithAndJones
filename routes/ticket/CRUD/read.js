@@ -18,7 +18,6 @@ ROUTER.get('/:id', (req, res) => {
     let id_ticket = parseInt(req.params.id)
    con.query(query+";"+comment, [id_ticket, id_ticket], (err,rows) => {
         if(err) throw err;
-        console.log(rows[1])
         res.render(__dirname + '/../../../public/ticket/CRUD/read.ejs', {ticket : rows[0][0], comments: rows[1]})
     });
   

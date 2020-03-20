@@ -11,7 +11,7 @@ let logoutAuthRouter = require('./routes/auth/logout');
 let addTicketRouter = require('./routes/ticket/CRUD/create');
 let readTicketRouter = require('./routes/ticket/CRUD/read')
 let closeTicketRouter = require('./routes/ticket/close')
-let RPGDRouter = require('./routes/RGPD/RGPD')
+let legalNoticeRouter = require('./routes/law/legalNoticeRouter')
 let con = require('./db')
 const SESSION = require('express-session');
 
@@ -64,8 +64,9 @@ app.use('/ticket/read/', readTicketRouter)
 app.use('/ticket/close/', closeTicketRouter)
 
 /***********************************/
-/*               RGPD              */
+/*               LAW               */
 /***********************************/
-app.use('/RGPD', RPGDRouter)
+app.use('/law/legal-notice', legalNoticeRouter)
+
 
 app.listen(PORT)
