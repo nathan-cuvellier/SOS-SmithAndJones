@@ -27,7 +27,8 @@ function applicant(req, res){
         " JOIN POSTE_DE_TRAVAIL pdt ON pdt.ID_poste = t.ID_poste" +
         " JOIN PRIORITE p ON p.id_priorite = t.ID_PRIORITE" +
         " JOIN CATEGORIE c on c.id_categorie = t.ID_CATEGORIE" +
-        " WHERE u.ID_UTILISATEUR = ?"
+        " WHERE u.ID_UTILISATEUR = ?" +
+        " ORDER BY t.CREATED_AT DESC"
 
     con.query(tickets, [2],(err, rows) =>
     {
@@ -45,7 +46,8 @@ function operatorManager(req, res){
         " JOIN UTILISATEUR u ON u.ID_UTILISATEUR = t.ID_UTILISATEUR" +
         " JOIN POSTE_DE_TRAVAIL pdt ON pdt.ID_poste = t.ID_poste" +
         " JOIN PRIORITE p ON p.id_priorite = t.ID_PRIORITE" +
-        " JOIN CATEGORIE c on c.id_categorie = t.ID_CATEGORIE"
+        " JOIN CATEGORIE c on c.id_categorie = t.ID_CATEGORIE" +
+        " ORDER BY t.CREATED_AT DESC"
 
     /**
      * this variable is use in order to add a "WHERE" or "AND" in the query
