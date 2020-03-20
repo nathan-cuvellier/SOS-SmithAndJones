@@ -45,24 +45,40 @@
                 </span>
             </div>
             <hr class="my-5">
-            <form action="/ticket/read/<%= ticket.ID_ticket %>" method="post">
+            <% if (Object.keys(errors).length > 0) { %>
+                <div class="alert alert-danger" role="alert">
+                    <h5>Erreur(s) :</h5>
+                    <ul>
+                        <% for(var i=0; i < errors.length; i++) { %>
+                            <li><%= errors[i].msg %></li>
+                        <% } %>
+                    </ul>
+                </div>
+            <% } %>
+            <form <% if(ticket.STATUS !== "terminé") { %> action="/ticket/read/<%= ticket.ID_ticket %>" method="post" <% } %>>
                 <div class="form-group">
                     <label for="comment">Ajouter un commentaire :</label>
-                    <textarea class="form-control" name="comment" id="comment" rows="3"></textarea>
+                    <textarea class="form-control" name="comment" id="comment" rows="3" <%= ticket.STATUS === "terminé" ? "disabled" : ""%>><% if(ticket.STATUS === "terminé") { %>Ticket clos, commentaire désactivé<%}%></textarea>
                 </div>
 
                 <div class="form-group">
+                    <% if(ticket.STATUS !== "terminé") { %>
                     <input type="submit" class="btn btn-dark" value="Valider" name="send_comment">
+                    <% } %>
                 </div>
             </form>
 
             <div class="mt-5">
                 <h3 class="mb-5">Commentaires :</h3>
                 <div class="ml-3">
-                    <% for(let comment of comments) { %>
-                        <span>De <b><%= comment.SURNAME %> <%= comment.NAME %> </b> le <%= new Date(comment.created_at).getDate() %>/<%= new Date(comment.created_at).getMonth() + 1 %>/<%= new Date(comment.created_at).getFullYear() %> à <%= new Date(comment.created_at).getHours()%>h<%= new Date(comment.created_at).getMinutes()%> :</span>
-                        <p class="ml-2"><%= comment.TEXT %></p>
-                    <% } %>
+                    <% if(comments.length === 0) { %>
+                        <i>Aucun commentaire...</i>
+                    <% } else { %>
+                        <% for(let comment of comments) { %>
+                            <span>De <b><%= comment.SURNAME %> <%= comment.NAME %> </b> le <%= new Date(comment.created_at).getDate() %>/<%= new Date(comment.created_at).getMonth() + 1 %>/<%= new Date(comment.created_at).getFullYear() %> à <%= new Date(comment.created_at).getHours()%>h<%= new Date(comment.created_at).getMinutes()%> :</span>
+                            <p class="ml-2"><%= comment.TEXT %></p>
+                        <% } %>
+                    <% }%>
                 </div>
             </div>
         </div>
