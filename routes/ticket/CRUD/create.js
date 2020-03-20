@@ -113,7 +113,7 @@ ROUTER.post('/', [
                                 'CREATED_AT': new Date(),
                                 'TITRE': req.body.title.trim(),
                                 'ID_CATEGORIE': id_categorie,
-                                'PRECISER': req.body.specify.length === 0 ? null : req.body.specify,
+                                'PRECISER': req.body.specify.length === 0 ? null : req.body.specify.trim(),
                                 'ATTACHMENT_URL': (req.files !== null && req.files.URL !== null) ? timestamp + "." + ext : null
                             },
                             (err, rows) =>
