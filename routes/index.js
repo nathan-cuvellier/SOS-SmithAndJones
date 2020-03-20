@@ -110,8 +110,6 @@ function operatorManager(req, res){
 
     let priorities = "SELECT * FROM PRIORITE"
 
-    console.log(tickets)
-
     con.query(tickets + ";" + priorities, params,(err, rows) =>
     {
         if (err) throw err;
