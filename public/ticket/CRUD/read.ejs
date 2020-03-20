@@ -12,7 +12,7 @@
 <body>
 <div class="container mt-md-5 mt-2 mb-5">
     <div class="row">
-        <div class="col-lg-9">
+        <div class="col-lg-8">
             <h3 class="text-center"><%= ticket.TITRE.toUpperCase() %></h3>
 
             <p class="mt-md-4 mt-2"><b>Catégorie : <%= ticket.label_categorie %></b></p>
@@ -43,6 +43,10 @@
                         </a>
                     <% } %>
                 </span>
+                <div class="mt-md-4 mt-2">
+                    <span><b>Plus précisement : </b></span>
+                    <span><%if(ticket.PRECISER === null) { %> <i>Aucune précision</i> <% } else { %> <%= ticket.PRECISER%> <% } %></span>
+                </div>
             </div>
             <hr class="my-5">
             <% if (Object.keys(errors).length > 0) { %>
@@ -82,7 +86,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-4">
             <div class="card text-center">
                 <div class="card-header">
                     Informations
@@ -96,6 +100,7 @@
                     <br>
                     <h6 class="d-inline">Urgence : </h6>
                     <p class="d-inline card-text"><%= ticket.label_priorite %></p>
+
                 </div>
                 <div class="card-footer">
                     <% if(ticket.STATUS === "terminé") { %>
