@@ -87,6 +87,21 @@ ROUTER.post('/', [
                     if (!id_priorites.includes(id_priorite) || !id_computers.includes(id_computer) || !id_categories.includes(id_categorie))
                         return res.status(403).send(err);
                     else {
+
+                        let ext = "" // extension of file
+                        let timestamp = (new Date()).valueOf()
+                        if (req.files !== null && req.files.URL !== null) {
+                            let split = req.files.URL.name.split('.')
+                            ext = split[split.length - 1]
+
+                            // insert file
+                            req.files.URL.mv('attachment/' + timestamp + "." + ext, function (err)
+                            {
+                                if (err)
+                                    return res.status(500).send(err);
+                            });
+                        }
+
                         con.query('INSERT INTO TICKET SET ?',
                             {
                                 'ID_UTILISATEUR': 1,
@@ -98,23 +113,14 @@ ROUTER.post('/', [
                                 'CREATED_AT': new Date(),
                                 'TITRE': req.body.title.trim(),
                                 'ID_CATEGORIE': id_categorie,
-                                'PRECISER': req.body.specify.length === 0 ? null : req.body.specify
+                                'PRECISER': req.body.specify.length === 0 ? null : req.body.specify,
+                                'ATTACHMENT_URL': (req.files !== null && req.files.URL !== null) ? timestamp + "." + ext : null
                             },
                             (err, rows) =>
                             {
                                 if (err) throw err;
 
-                                if (req.files !== null && req.files.URL !== null) {
-                                    let split = req.files.URL.name.split('.')
-                                    let ext = split[split.length - 1]
 
-                                    // insert file
-                                    req.files.URL.mv('attachment/' + (new Date()).valueOf() + "." + ext, function (err)
-                                    {
-                                        if (err)
-                                            return res.status(500).send(err);
-                                    });
-                                }
 
                                 success = true
 
