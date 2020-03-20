@@ -5,7 +5,7 @@ const {check, validationResult} = require('express-validator');
 
 ROUTER.get('/', (req, res) =>
 {
-
+    // get all computers; all priorities; all categories;
     con.query('SELECT * FROM POSTE_DE_TRAVAIL;SELECT * FROM PRIORITE;SELECT * FROM CATEGORIE', (err, rows) =>
     {
         if (err) throw err
@@ -47,7 +47,14 @@ ROUTER.post('/', [
     ],
     (req, res) =>
     {
+        /**
+         * Get array of errors
+         * @type {Result<{param: "_error"; msg: any; nestedErrors: ValidationError[]; location?: undefined; value?: undefined} | {location: Location; param: string; value: any; msg: any; nestedErrors?: unknown[]}>}
+         */
         const errors = validationResult(req)
+        /**
+         * Var use in order to display a pop up for user with a message of success
+         */
         let success = null
 
         if (!errors.isEmpty()) {
@@ -101,6 +108,7 @@ ROUTER.post('/', [
                                     let split = req.files.URL.name.split('.')
                                     let ext = split[split.length - 1]
 
+                                    // insert file
                                     req.files.URL.mv('attachment/' + (new Date()).valueOf() + "." + ext, function (err)
                                     {
                                         if (err)
@@ -121,6 +129,12 @@ ROUTER.post('/', [
 
     })
 
+/**
+ *
+ * @param res
+ * @param errors
+ * @param success
+ */
 function getView(res, errors, success)
 {
     con.query('SELECT * FROM POSTE_DE_TRAVAIL;SELECT * FROM PRIORITE;SELECT * FROM CATEGORIE', [], (err, rows) =>

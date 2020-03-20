@@ -14,6 +14,11 @@ ROUTER.get('/', (req, res) =>
 
 })
 
+/**
+ *
+ * @param req
+ * @param res
+ */
 function applicant(req, res){
 
     let tickets = "SELECT * FROM TICKET t" +
@@ -115,6 +120,7 @@ function operatorManager(req, res){
         if (err) throw err;
 
         let count = false
+        // for show the number of ticket found after filter
         if(Object.keys(req.query).length > 0)
             count = rows[0].length
 
