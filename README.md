@@ -1,4 +1,4 @@
-# SOS-SmithAndJones
+# SOS-SmithAndJones - TP nodejs
 
 ## Page de connexion
 ![home](https://raw.githubusercontent.com/nathan-cuvellier/SOS-SmithAndJones/master/img/login.PNG)
