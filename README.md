@@ -13,4 +13,4 @@
 ![home](https://raw.githubusercontent.com/nathan-cuvellier/SOS-SmithAndJones/master/img/create.PNG)
 
 ## Page détaillant un ticket
-![home](https://raw.githubusercontent.com/nathan-cuvellier/SOS-SmithAndJones/master/img/create.PNG)
+![home](https://raw.githubusercontent.com/nathan-cuvellier/SOS-SmithAndJones/master/img/read.PNG)
